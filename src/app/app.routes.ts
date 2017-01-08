@@ -9,9 +9,9 @@ import { RepoDetailComponent } from './github/repo-detail/repo-detail.component'
 import { ContactComponent } from './contact/contact.component';
 
 export const rootRouterConfig: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'paycheck', pathMatch: 'full' },
+    { path: 'paycheck', component:PaycheckComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'paycheck', component:PaycheckComponent },
   { path: 'about', component: AboutComponent },
   { path: 'github', component: RepoBrowserComponent,
     children: [
