@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
+import { PaycheckComponent } from './paycheck/paycheck.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { RepoBrowserComponent } from './github/repo-browser/repo-browser.component';
@@ -23,7 +24,8 @@ import { ContactComponent } from './contact/contact.component';
     RepoListComponent,
     RepoDetailComponent,
     HomeComponent,
-    ContactComponent
+    ContactComponent,
+    PaycheckComponent
   ],
   imports: [
     BrowserModule,
