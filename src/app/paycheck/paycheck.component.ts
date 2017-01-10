@@ -60,7 +60,7 @@ export class PaycheckComponent {
       pay_frequency: [''],
       filling_status: ['']
     });
-    this.paycheck.gross_pay = true;
+
   }
 
   computePaycheck(){
