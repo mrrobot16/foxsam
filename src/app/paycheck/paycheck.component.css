@@ -16,3 +16,13 @@
 select {
   background-color: #b6d0ff;
 }
+
+/*.paycheck-form label {
+  display: flex;
+  justify-content: center;
+}*/
+
+.flexify {
+  display: flex;
+  justify-content: center;
+}

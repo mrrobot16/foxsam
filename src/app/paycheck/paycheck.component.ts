@@ -5,24 +5,34 @@ import CustomValidators from '../forms/CustomValidators';
   selector: 'paycheck',
   styleUrls: ['./paycheck.component.css'],
   template: `
-  <h2>Your Paycheck</h2>
+
+
+    <div id="results">
+      <p>Gross Pay: {{paycheck}}</p>
+      <p>Federal Income Tax: {{paycheck}}</p>
+      <p>Social Security: {{paycheck}}</p>
+      <p>Medicare: {{paycheck}}</p>
+      <p>Annual Net: {{paycheck}}</p>
+      <p>Monthly Net: {{paycheck}}</p>
+    </div>
     <div id="paycheck">
+    <h2>Your Paycheck</h2>
       <form (ngSubmit)="computePaycheck()" [formGroup]="paycheckForm" novalidate>
-        <div class="form-content">
-          <label>
+        <div class="paycheck-form">
+          <label class="flexify">
             Gross Pay
-            <input type="number" formControlName="gross_pay" class="sd-form-control" placeholder="How money?">
+            <input type="number" formControlName="gross_pay" placeholder="How money?">
           </label>
-        <label>
-            Pay Frequency
+        <label class="flexify">
+            Pay Frequency:
           <!--    <input type="text"  formControlName="pay_frequency" class="sd-form-control" placeholder="Annually, Monthly, Bimonthly, Biweekly?">-->
-              <select id="pay_frequency" formControlName="filling_status" class="sd-form-control">
+              <select id="pay_frequency" formControlName="pay_frequency" >
               <option value="annually">Annually</option>
               <option value="monthly">Monthly</option>
               </select>
           </label>
 
-           <label>
+           <label class="flexify">
             Filling Status:
             <!-- <input type="text" formControlName="filling_status" class="sd-form-control" placeholder="Single, Married, Married File Separate, Head of Household?">-->
             <select id="filling_status" formControlName="filling_status" class="sd-form-control">
@@ -30,17 +40,17 @@ import CustomValidators from '../forms/CustomValidators';
             <option value="married">Married</option>
             </select>
           </label>
-          <div class="form-submit">
+          <label class="form-submit">
             <button type="submit">Calculate</button>
-          </div>
+          </label>
         </div>
       </form>
     </div>
   `
 })
 export class PaycheckComponent {
-  paycheckForm:FormGroup;
-
+  paycheckForm: FormGroup;
+  paycheck: any = {}
   constructor(private formBuilder: FormBuilder) {
 
   }
@@ -53,6 +63,7 @@ export class PaycheckComponent {
   }
 
   computePaycheck(){
-    console.log("computePaycheck()")
+    console.log("computePaycheck() form object");
+    console.log(this.paycheckForm);
   }
 }
