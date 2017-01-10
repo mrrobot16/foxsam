@@ -8,12 +8,12 @@ import CustomValidators from '../forms/CustomValidators';
 
 
     <div id="results">
-      <p>Gross Pay: {{paycheck}}</p>
-      <p>Federal Income Tax: {{paycheck}}</p>
-      <p>Social Security: {{paycheck}}</p>
-      <p>Medicare: {{paycheck}}</p>
-      <p>Annual Net: {{paycheck}}</p>
-      <p>Monthly Net: {{paycheck}}</p>
+      <p *ngIf="paycheck.gross_pay">Gross Pay: {{paycheckForm.value.gross_pay}}</p>
+      <p *ngIf="paycheck.fed_tax">Federal Income Tax: {{paycheck}}</p>
+      <p *ngIf="paycheck.social_security">Social Security: {{paycheck.social_security}}</p>
+      <p *ngIf="paycheck.medicare">Medicare: {{paycheck}}</p>
+      <p *ngIf="paycheck.annual_net">Annual Net: {{paycheck}}</p>
+      <p *ngIf="paycheck.monthly_net">Monthly Net: {{paycheck}}</p>
     </div>
     <div id="paycheck">
     <h2>Your Paycheck</h2>
@@ -21,7 +21,7 @@ import CustomValidators from '../forms/CustomValidators';
         <div class="paycheck-form">
           <label class="flexify">
             Gross Pay
-            <input type="number" formControlName="gross_pay" placeholder="How money?">
+            <input type="number" formControlName="gross_pay" [value]="45000" placeholder="How money?" (ngModelChange)="computePaycheck()">
           </label>
         <label class="flexify">
             Pay Frequency:
@@ -56,14 +56,19 @@ export class PaycheckComponent {
   }
   ngOnInit(){
     this.paycheckForm = this.formBuilder.group({
-      gross_pay: [''],
+      gross_pay: [0],
       pay_frequency: [''],
       filling_status: ['']
     });
+    this.paycheck.gross_pay = true;
   }
 
   computePaycheck(){
     console.log("computePaycheck() form object");
-    console.log(this.paycheckForm);
+    this.paycheck.gross_pay = this.paycheckForm.value.gross_pay;
+    var gross_pay = this.paycheckForm.value.gross_pay;
+    this.paycheck.social_security = gross_pay*0.062;
+    this.paycheck.medicare = gross_pay*0.0145
+
   }
 }
