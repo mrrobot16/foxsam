@@ -1,6 +1,27 @@
 #app {
   background-color: #0e2dff;
+  position: relative;
+  top: -1.5em;
+  height:46.7em;
 }
+
+nav {
+  display: flex;
+  justify-content: center;
+  padding-top: 3em;
+  padding-bottom: 1em;
+}
+
 nav a {
   color:#a3c3ff;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
 }

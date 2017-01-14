@@ -13,6 +13,13 @@
   font-size: 10px;
 }
 
+.form-submit {
+  color: #68902d;
+  background-color: darkblue;
+  display: flex;
+  justify-content: center;
+}
+
 select {
   background-color: #b6d0ff;
 }
@@ -24,5 +31,5 @@ select {
 
 .flexify {
   display: flex;
-  justify-content: center;
+
 }
