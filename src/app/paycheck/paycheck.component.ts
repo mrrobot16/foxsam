@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import CustomValidators from '../forms/CustomValidators';
+import {FedTaxService} from './shared/fed_tax.service';
 @Component({
   selector: 'paycheck',
   styleUrls: ['./paycheck.component.css'],
@@ -22,13 +23,13 @@ import CustomValidators from '../forms/CustomValidators';
         <div class="paycheck-form">
           <label class="flexify">
             Gross Pay
-            <input type="number" formControlName="gross_pay" [value]="45000" placeholder="How money?" (keyup)="computePaycheck()">
+            <input type="number" formControlName="gross_pay"  placeholder="How money?" (keyup)="computePaycheck()">
           </label>
         <label class="flexify">
             Pay Frequency:
           <!--    <input type="text"  formControlName="pay_frequency" class="sd-form-control" placeholder="Annually, Monthly, Bimonthly, Biweekly?">-->
               <select id="pay_frequency" formControlName="pay_frequency" >
-              <option value="annually">Annually</option>
+              <option value="annual" [selected]='true'>Annually</option>
               <option value="monthly">Monthly</option>
               </select>
           </label>
@@ -37,8 +38,9 @@ import CustomValidators from '../forms/CustomValidators';
             Filling Status:
             <!-- <input type="text" formControlName="filling_status" class="sd-form-control" placeholder="Single, Married, Married File Separate, Head of Household?">-->
             <select id="filling_status" formControlName="filling_status" class="sd-form-control">
-            <option value="single">Single</option>
+            <option value="single" [selected]='true'>Single</option>
             <option value="married">Married</option>
+            <option value="single">Married file separated</option>
             </select>
           </label>
           <label class="form-submit">
@@ -60,19 +62,22 @@ export class PaycheckComponent {
     this.paycheck.gross_pay = 45000;
     this.paycheckForm = this.formBuilder.group({
       gross_pay: [45000],
-      pay_frequency: [''],
-      filling_status: ['']
+      pay_frequency: ['annual'],
+      filling_status: ['single']
     });
     this.computePaycheck();
   }
 
   computePaycheck(){
     var paycheck = this.paycheck
-    this.paycheck.gross_pay = this.paycheckForm.value.gross_pay;
-    this.paycheck.fed_tax = paycheck.gross_pay*0.2;
-    this.paycheck.social_security = paycheck.gross_pay*0.062;
-    this.paycheck.medicare = paycheck.gross_pay*0.0145;
-    this.paycheck.net_annual = paycheck.gross_pay - paycheck.fed_tax;
-    this.paycheck.net_monthly = paycheck.net_annual/12;
+    paycheck.gross_pay = this.paycheckForm.value.gross_pay;
+    paycheck.filling_status = this.paycheckForm.value.filling_status;
+    paycheck.pay_frequency = this.paycheckForm.value.pay_frequency;
+    paycheck.fed_tax = paycheck.gross_pay*0.2*0;
+    paycheck.social_security = paycheck.gross_pay*0.062;
+    paycheck.medicare = paycheck.gross_pay*0.0145;
+    paycheck.net_annual = paycheck.gross_pay - paycheck.fed_tax;
+    paycheck.net_monthly = paycheck.net_annual/12;
+
   }
 }
