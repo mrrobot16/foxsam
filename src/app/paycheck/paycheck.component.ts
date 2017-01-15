@@ -55,7 +55,8 @@ import {FedTaxService} from './shared/fed_tax.service';
 export class PaycheckComponent {
   paycheckForm: FormGroup;
   paycheck: any = {}
-  constructor(private formBuilder: FormBuilder) {
+
+  constructor(private formBuilder: FormBuilder, private fed_tax_service: FedTaxService) {
 
   }
   ngOnInit(){
@@ -73,7 +74,10 @@ export class PaycheckComponent {
     paycheck.gross_pay = this.paycheckForm.value.gross_pay;
     paycheck.filling_status = this.paycheckForm.value.filling_status;
     paycheck.pay_frequency = this.paycheckForm.value.pay_frequency;
-    paycheck.fed_tax = paycheck.gross_pay*0.2*0;
+
+    // TODO Build FedWithholding logic
+    paycheck.fed_tax = paycheck.gross_pay*this.fed_tax_service.fed_withholding();
+
     paycheck.social_security = paycheck.gross_pay*0.062;
     paycheck.medicare = paycheck.gross_pay*0.0145;
     paycheck.net_annual = paycheck.gross_pay - paycheck.fed_tax;

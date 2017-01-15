@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { rootRouterConfig } from './app.routes';
 import { AppComponent } from './app.component';
 import { GithubService } from './github/shared/github.service';
+import {FedTaxService} from './paycheck/shared/fed_tax.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
@@ -35,7 +36,7 @@ import { ContactComponent } from './contact/contact.component';
     RouterModule.forRoot(rootRouterConfig, { useHash: true })
   ],
   providers: [
-    GithubService
+    GithubService,FedTaxService
   ],
   bootstrap: [ AppComponent ]
 })

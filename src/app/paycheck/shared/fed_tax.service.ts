@@ -1,5 +1,8 @@
 import {Injectable} from "@angular/core"
 @Injectable()
-export class FedTaxService {
 
+export class FedTaxService {
+  fed_withholding(){
+    return 0;
+  }
 }
